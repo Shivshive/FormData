@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="/pages/stylesheet/stylesheet.css">
+    <title>FormData</title>
+</head>
+
+<body>
+
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="offset-md-3 col-md-6 col-lg-6 offset-lg-4 offset-sm-3">
+                <div class="card" style="width: 35rem;">
+                    <div class="card-header bg-primary text-white text-center display-4">Surround Products WhatsApp Group</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Enter Your Details</h5>
+                        <form id="myform" class="card-text p-3 text-left" action="/addmember" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="inputEmail4">Name</label>
+                                <div class="input-group mb-3" id="inputEmail4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i
+                                                class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="text" id="firstname" name="firstname" class="form-control" placeholder="Enter Name"
+                                        aria-label="Username" aria-describedby="basic-addon1" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword4">Phone Number</label>
+
+                                <div class="input-group mb-3" id="inputPassword4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i
+                                                class="fas fa-phone-volume"></i></span>
+                                    </div>
+                                    <input type="text" id="whatsappcontact" name="phonenumber" class="form-control" placeholder="Enter WhatsApp Number"
+                                        aria-label="Username" aria-describedby="basic-addon1" required>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-outline-secondary" id="submi_frm" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="scripts/index.js"></script>
+    <script src="scripts/checkphonenumber.js"></script>
+    <script src="scripts/phonenumberinputevents.js"></script>
+    <script src="scripts/postdata.js"></script>
+</body>
+
+</html>
