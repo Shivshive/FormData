@@ -10,5 +10,4 @@ Clone project from here and perform below commands -
 * Perform yarn start.
 * Open http://localhost:3000/whatsappgroup on browser.
 
-![alt text]('/public/img/Application_Interface.png')
-<!-- ![Alt text](relative/path/to/img.jpg?raw=true "Title") -->
+![Alt text](/public/img/Application_Interface.png?raw=true "FormData")
