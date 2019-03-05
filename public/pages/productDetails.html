@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="/pages/stylesheet/stylesheet.css">
+    <title>Products Details</title>
+</head>
+
+<body>
+
+    <div class="container-fluid mt-5 text-center p-3 pt-5" id="pdetails_ctrl">
+
+        <h5 class="card-title">Fill up details here...</h5>
+        <form id="myform" class="card-text p-3 text-left" action="/productdetails/add_prod_details" method="POST"
+            enctype="multipart/form-data">
+
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label for="provider">Information Provider Name</label>
+                    <input type="text" class="form-control" name="provider" id="provider">
+                </div>
+                <div class="form-group col-6">
+                    <label for="prodname">Product Name</label>
+                    <input type="text" class="form-control" name="prodname" id="prodname">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label for="releaseversion">Release Version</label>
+                    <input type="text" class="form-control" name="releaseversion" id="releaseversion">
+                </div>
+                <div class="form-group col-6">
+                    <label for="releasedate">Release Date</label>
+                    <input type="date" class="form-control" name="releasedate" id="releasedate">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="appurl">Application URL</label>
+                <input type="text" class="form-control" name="appurl" id="serivceurl">
+            </div>
+            <div class="form-group">
+                <label for="serivceurl">WebService URL</label>
+                <input type="text" class="form-control" name="serivceurl" id="serivceurl">
+            </div>
+            <div class="form-group">
+                <label for="gitbranch">Git URL</label>
+                <input type="text" class="form-control" name="gitbranch" id="gitbranch">
+            </div>
+            <div class="form-group">
+                <label for="dateinformationprovided">Date Information Provided</label>
+                <input type="date" class="form-control" name="dateinformationprovided" id="dateinformationprovided">
+            </div>
+
+            <div class="text-center">
+                <input type="submit" class="btn btn-outline-secondary" id="submi_frm" value="Submit">
+            </div>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="/scripts/postdata.js"></script>
+    <script>
+        $(document).ready(() => {
+
+            $('#myform').on('submit', (e) => {
+
+                // Preventing default form operations...
+                e.preventDefault();
+
+                var form = $('#myform');
+                var formdata = false;
+                if (window.FormData) {
+                    let formdata = new FormData(form[0]);
+                    //Posting data to webservice ...
+                    post_data(form, formdata);
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

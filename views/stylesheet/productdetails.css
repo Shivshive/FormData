@@ -1,0 +1,61 @@
+#submitForm{
+    width: 70%;
+    padding: 10px;
+}
+
+body{
+    margin: 0px;
+    padding: 0px;
+    background-image: url("/img/b4.jpg");
+    /* background-repeat: no-repeat; */
+    background-position: center; 
+    background-size: auto; /* Center the image */
+}
+
+.form-control  , .input-group-text{
+    border: 0.5px;
+    border-radius: 0px;
+}
+
+.form-row>.col, .form-row>[class*=col-] {
+    padding-right: 1px;
+    padding-left: 1px;
+    padding-top: 2px;
+}
+.jumbotron.text-center.text-uppercase{
+    background-color: cadetblue;
+    border-radius: 0%;
+}
+
+.input-group-text{
+    background-color: lightblue;
+    color: black;
+}
+
+.card-header{
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card-title{
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.form-row {
+    margin-left: 0%;
+    margin-right : 0%;
+}
+
+/* .form-group{
+    padding: 2px;
+    margin: 0px;
+} */
+
+.form-group{
+    margin: 0px;
+    padding-top:2px;
+    padding-right: 1px;
+    padding-left: 1px;
+}

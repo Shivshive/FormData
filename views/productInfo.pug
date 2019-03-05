@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.2/css/all.css")
+        style
+            include stylesheet/productdetails.css
+        title=title_
+    body
+
+    - var Header = "Product Survey"
+    - var validfeedback = "Looks Good !"
+    - var submitButtonText = "Enter"
+    - var resultObj = false;
+
+        .container
+            .jumbotron.text-center.text-uppercase
+                h1.display-4=Header
+            .container.p-3
+            unless errors
+                form(action="/addProductDetails", method="post")
+                    .form-row
+                        .col    
+                            div.input-group
+                                div.input-group-prepend
+                                    div.input-group-text
+                                        i.fas.fa-user                           
+                                input.form-control#providername(type="text", name="providername", placeholder="Information Provider Name")
+                                .valid-feedback=validfeedback
+                                .invalid-feedback="Please enter correct name"
+                        .col    
+                            div.input-group
+                                div.input-group-prepend
+                                    div.input-group-text
+                                        i.fab.fa-autoprefixer                        
+                                input.form-control#productname(type="text", name="productname", placeholder="Product Name")
+                                .valid-feedback=validfeedback
+                    .form-row
+                        .col    
+                            div.input-group
+                                div.input-group-prepend
+                                    div.input-group-text
+                                        i.fas.fa-feather-alt                    
+                                input.form-control#releaseversion(type="text", name="releaseversion", placeholder="Release Version")
+                                .valid-feedback=validfeedback
+                                .invalid-feedback="Please enter correct name"
+                        .col    
+                            div.input-group
+                                div.input-group-prepend
+                                    div.input-group-text
+                                        i.far.fa-calendar-alt                      
+                                input.form-control#releasedate(type="type", name="releasedate", placeholder="Release Date (MM/YY)")
+                                .valid-feedback=validfeedback
+                    .form-group
+                        div.input-group
+                                div.input-group-prepend
+                                    div.input-group-text
+                                        i.fas.fa-at                
+                                input.form-control#appurl(type="text", name="appurl", placeholder="Application URL")
+                                .valid-feedback=validfeedback
+                                .invalid-feedback="Please enter correct URL"
+                    .form-group
+                        div.input-group
+                                div.input-group-prepend
+                                    div.input-group-text
+                                        i.fas.fa-at              
+                                input.form-control#serivceurl(type="text", name="serivceurl", placeholder="Microservice URL")
+                                .valid-feedback=validfeedback
+                                .invalid-feedback="Please enter correct URL"
+                    .form-group
+                        div.input-group
+                                div.input-group-prepend
+                                    div.input-group-text
+                                        i.fas.fa-at                
+                                input.form-control#gitbranch(type="text", name="gitbranch", placeholder="Microservice URL")
+                                .valid-feedback=validfeedback
+                                .invalid-feedback="Please enter correct URL"
+                    
+                    hr
+                    .form-row.justify-content-around
+                        input(type="submit", value=submitButtonText).btn.btn-success#submitForm
+            else
+                .card.text-center(style="width:50%; margin-left:25%")
+                    .card-header=cardheader
+                    .card-body
+                        unless errors
+                            .card-title=cardtitle
+                            .card-text=cardtext
+                        else
+                            .card-title=errors.title
+                            .card-text=errors.description
+                        
+
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js")

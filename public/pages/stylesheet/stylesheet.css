@@ -6,6 +6,17 @@
     box-shadow: 0px 43px 86px 14px black;
 }
 
+#pdetails_ctrl{
+    background-color: white;
+    width: 50%;
+    border-radius: 10px;
+    font-size: 11px;
+}
+
+input{
+    font-size: 5px;
+}
+
 body{
-    background-image: url('/img/background.jpg')
+    background-image: url('/img/background.jpg');
 }
