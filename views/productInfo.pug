@@ -17,8 +17,8 @@ html(lang="en")
             .jumbotron.text-center.text-uppercase
                 h1.display-4=Header
             .container.p-3
-            unless errors
-                form(action="/addProductDetails", method="post")
+            unless response
+                form(action="/productdetails/addProductDetails", method="post")
                     .form-row
                         .col    
                             div.input-group
@@ -72,7 +72,7 @@ html(lang="en")
                                 div.input-group-prepend
                                     div.input-group-text
                                         i.fas.fa-at                
-                                input.form-control#gitbranch(type="text", name="gitbranch", placeholder="Microservice URL")
+                                input.form-control#gitbranch(type="text", name="gitbranch", placeholder="Git Branch URL")
                                 .valid-feedback=validfeedback
                                 .invalid-feedback="Please enter correct URL"
                     
@@ -81,14 +81,21 @@ html(lang="en")
                         input(type="submit", value=submitButtonText).btn.btn-success#submitForm
             else
                 .card.text-center(style="width:50%; margin-left:25%")
-                    .card-header=cardheader
+                    .card-header=cardheader.toUpperCase()
                     .card-body
-                        unless errors
+                        unless response.errors
                             .card-title=cardtitle
-                            .card-text=cardtext
+                            .card-text
+                                .lead.bg-gradient-secondary
+                                    h5.text-center.text-success="Transaction ID"
+                                    p.text-center
+                                        strong=response.result.id
                         else
-                            .card-title=errors.title
-                            .card-text=errors.description
+                            .card-title=response.errors.title
+                            .card-text
+                                ul.list-group
+                                    each item in response.errors.description
+                                        li.list-group-item.list-group-item-danger=item.toUpperCase()
                         
 
     script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js")

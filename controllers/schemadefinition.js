@@ -2,18 +2,33 @@ let schemadef = {
   provider: {
     type: String,
     require: true,
-    trim: true
+    trim: true,
+    validate : {
+      validator : (value)=>{
+        return value!= "" && value !=" "
+      },message : "Information Provider cannot be blank"
+    }
   },
   prodname: {
     type: String,
-    trim: true
+    trim: true,
+    validate : {
+      validator : (value)=>{
+        return value!= "" && value !=" "
+      },message : "Product Name cannot be blank"
+    }
   },
   releaseversion: {
     type: String,
-    trim: true
+    trim: true,
+    validate : {
+      validator : (value)=>{
+        return value!= "" && value !=" "
+      },message : "Release Version cannot be blank"
+    }
   },
   releasedate: {
-    type: Date,
+    type: String,
     trim: true
   },
   appurl: {
@@ -22,7 +37,12 @@ let schemadef = {
   },
   serivceurl: {
     type: String,
-    trim: true
+    trim: true,
+    validate : {
+      validator : (value)=>{
+        return value!= "" && value !=" "
+      },message : "Service URL cannot be blank"
+    }
   },
   gitbranch: {
     type: String,

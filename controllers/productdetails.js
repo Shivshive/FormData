@@ -13,14 +13,14 @@ router.use(bodyparser.json())
 router.use(bodyparser.urlencoded({ extended: true }))
 
 router.get('/', (req, res) => {
-  res.render('productInfo', {
+  let pageObject = {
     title_: 'Product Details',
     cardheader: 'Thank you for filling this form !',
     cardtitle: 'Your data has been successfully saved !',
     cardtext: 'Please close this window.',
-    // errors: {title:'Error Occured',description:'validation error'},
-    errors : undefined
-  })
+    response: undefined
+  }
+  res.render('productInfo', { pageObject })
 })
 
 router.post(
@@ -28,14 +28,38 @@ router.post(
   upload.none(),
   createDataObject,
   saveProductDetails,
-  (req, res) => {}
+  (req, res) => {
+    let pageObject = {
+      title_: 'Product Details',
+      cardheader: 'Thank you for filling this form !',
+      cardtitle: 'Your data has been successfully saved !',
+      response: undefined
+    }
+
+    if (req.result) {
+      console.log(JSON.stringify(req.result, false, 3))
+      pageObject.response = {
+        result: {
+          name: req.result.provider,
+          id: req.result.id
+        }
+      }
+      res.render('productInfo', pageObject)
+    } else {
+      console.log(savebymongoose.showErrors(req.errors));
+      pageObject.response = {
+        errors: { title: req.errors.name, description: savebymongoose.showErrors(req.errors)}
+      }
+      res.render('productInfo', pageObject)
+    }
+  }
 )
 
 function createDataObject (req, res, next) {
   let productObj = {}
 
-  productObj.provider = req.body.provider
-  productObj.prodname = req.body.prodname
+  productObj.provider = req.body.providername
+  productObj.prodname = req.body.productname
   productObj.releaseversion = req.body.releaseversion
   productObj.releasedate = req.body.releasedate
   productObj.appurl = req.body.appurl
@@ -43,45 +67,44 @@ function createDataObject (req, res, next) {
   productObj.gitbranch = req.body.gitbranch
 
   req.productObj = productObj
+
   next()
 }
 
-module.exports = router
-
 function saveProductDetails (req, res, next) {
-  let connectionstring = 'mongodb://localhost/surround_products'
+  let connectionstring = 'mongodb://localhost/sp'
+
   savebymongoose
     .connect(connectionstring)
-    .then(con => {
-      console.log('Connection Established.. ')
-
+    .then(connection => {
+      console.log('connection ready .. ')
+      let document = savebymongoose.compile(
+        schemadef,
+        'ProductsDetails',
+        req.productObj
+      )
       savebymongoose
-        .compile(schemadef, 'release_Information', req.productObj)
-        .then(cmodel => {
-          console.log('model compiled..')
-
-          savebymongoose
-            .insert(cmodel)
-            .then(result => {
-              console.log('model inserted ..')
-              req.result.status = result
-              next()
-            })
-            .catch(e => {
-              console.log(e)
-              req.result.errors = e
-              next()
-            })
+        .insert(document)
+        .then(data => {
+          console.log('document saved successfully')
+          req.result = data
+          savebymongoose.disconnect(connection)
+          next()
         })
         .catch(e => {
-          console.log(e)
-          req.result.errors = e
+          console.log('Unable to insert document due to below error')
+          console.log(JSON.stringify(e,false, 3))
+          req.errors = e
+          savebymongoose.disconnect(connection)
           next()
         })
     })
     .catch(e => {
-      console.log(e)
-      req.result.errors = e
+      console.log('Unable to establish connection due to below error')
+      console.log(JSON.stringify(e, false, 3))
+      req.errors = e
       next()
     })
 }
+
+module.exports = router
